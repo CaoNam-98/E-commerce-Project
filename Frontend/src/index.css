@@ -1,0 +1,69 @@
+main{
+  min-height: 80vh;
+}
+
+.navbar {
+  padding: 12px 10px !important;
+}
+
+.rounded {
+  background-image: linear-gradient(180deg, #ffffff, #ebeaea); 
+  padding: 0px;
+}
+
+.p-3 {
+  padding: 3rem !important;
+}
+
+.my-3 .p-3 .rounded .card > a {
+  padding: 0;
+}
+
+.product_detail .card-btn, 
+.card-btn {
+  display: flex;
+  margin: 0 auto;
+}
+
+.card-body > a {
+  text-decoration: none;
+}
+
+.card-body {
+  padding: 0px !important;
+}
+
+.card-title {
+  margin: 0px !important;
+}
+
+.card-text {
+  font-size: 16px;
+  color: #c48c46;
+  font-weight: 400;
+  text-align: center;
+}
+
+.card-body .card-title strong {
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  font-family: Roboto,sans-serif;
+}
+
+.rating {
+  display: flex;
+  padding-left: 18px;
+}
+
+.rating > span > h6 {
+  margin-bottom: 0;
+  line-height: 1.5rem;
+  font-size: 0.65rem;
+  padding-left: 5px;
+}
+
+/* Place Order */
+.list-group-item {
+  padding: 0;
+}
