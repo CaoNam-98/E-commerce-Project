@@ -8,7 +8,7 @@ import './../index.css'
 import { getOrderDetails } from '../actions/orderActions'
 import { Link } from 'react-router-dom'
 
-function PlaceOrderScreen({ match }) {
+function OrderScreen({ match }) {
     console.log('mẹ ơi 2')
     const orderId = match.params.id
     const dispatch = useDispatch()
@@ -50,9 +50,11 @@ function PlaceOrderScreen({ match }) {
                         <ListGroup.Item >
                             <h3>Địa Chỉ Giao Hàng</h3>
                             <p>
+                                <i class="fas fa-user-alt"></i>{' '}
                                 <strong>Tên khách hàng: {order.user.name}</strong>
                             </p>
                             <p>
+                                <i class="fas fa-envelope"></i>{' '}
                                 <strong>Email: <a href={`mailto:${order.user.email}`}>{order.user.email}</a></strong>
                             </p>
                             <i class="fas fa-address-card"></i>{' '}
@@ -88,7 +90,7 @@ function PlaceOrderScreen({ match }) {
                                         <ListGroup.Item key={index}>
                                             <Row>
                                                 <Col md={1}>
-                                                    <Image src={`/images/${item.image}`} alt={item.name} fluid rounded/>
+                                                    <Image src={item.image} alt={item.name} fluid rounded/>
                                                 </Col>
                                                 <Col md={6}>
                                                     <Link to={`/product/${item.product}`}>
@@ -109,7 +111,7 @@ function PlaceOrderScreen({ match }) {
                 <Col md={4}>
                     <ListGroup>
                         <ListGroup.Item>
-                            <h3>Hoá Đơn</h3>
+                            <h3>Hoá Đơn Chi Tiết</h3>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Row>
@@ -146,5 +148,5 @@ function PlaceOrderScreen({ match }) {
     )
 }
 
-export default PlaceOrderScreen
+export default OrderScreen
 
