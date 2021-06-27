@@ -95,8 +95,8 @@ from datetime import timedelta
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=30), # set thời gian tồn tại của access token là 30 days
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1), # thời gian tồn tại của refresh token là 1 days
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=100), # set thời gian tồn tại của access token là 30 days
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=100), # thời gian tồn tại của refresh token là 1 days
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': False,

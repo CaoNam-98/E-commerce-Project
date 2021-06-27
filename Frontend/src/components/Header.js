@@ -44,6 +44,21 @@ function Header() {
                                 </Nav.Link>
                             </LinkContainer> 
                         )} 
+                        {userInfo && userInfo.isAdmin ? (
+                            <NavDropdown title="Admin" id="basic-nav-dropdown">
+                                <LinkContainer to="/admin/userlist">
+                                    <NavDropdown.Item>User List</NavDropdown.Item>
+                                </LinkContainer>
+                                <NavDropdown.Divider />  
+                                <LinkContainer to="/admin/productlist">
+                                    <NavDropdown.Item>Product List</NavDropdown.Item>
+                                </LinkContainer>
+                                <NavDropdown.Divider />  
+                                <LinkContainer to="/admin/orderlist">
+                                    <NavDropdown.Item>Order List</NavDropdown.Item>
+                                </LinkContainer>                                 
+                          </NavDropdown>
+                        ) : ''}
                     </Nav>
                     </Navbar.Collapse>
                 </Container>

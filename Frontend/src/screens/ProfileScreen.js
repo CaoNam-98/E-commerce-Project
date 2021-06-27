@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import {Form, Button, Row, Col} from 'react-bootstrap'
+import {Form, Button, Row, Col, Table} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../components/Loading'
 import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
 import { getUserDetails,  updateUserProfile} from '../actions/userActions'
 import { USER_UPDATE_PROFILES_RESET } from '../constants/userConstants'
+import {listMyOrders} from '../actions/orderActions'
+import { orderListMyReducer } from '../reducers/orderReducers'
 
 function ProfileScreen({history}) {
     const [name, setName] = useState('')
@@ -25,6 +27,11 @@ function ProfileScreen({history}) {
     const userUpdateProfile = useSelector(state => state.userUpdateProfile)
     const { success } = userUpdateProfile
 
+    const orderListMy = useSelector(state => state.orderListMy)
+    const { loading, error, orders } = orderListMy
+    console.log(userInfo)
+    console.log(user)
+    console.log(success)
     useEffect(() => {
         if(!userInfo){
             history.push('/login')
@@ -32,6 +39,7 @@ function ProfileScreen({history}) {
             if(!user || !user.name || success) {
                 dispatch({ type: USER_UPDATE_PROFILES_RESET })
                 dispatch(getUserDetails('profile'))
+                dispatch(listMyOrders())
             }else{
                 setName(user.name)
                 setEmail(user.email)
@@ -57,7 +65,7 @@ function ProfileScreen({history}) {
     return (
         <Row> 
             <Col md={3}>
-                <h2>User Profile</h2>
+                <h2>Khách Hàng</h2>
                 {message && <Message variant='danger'>{message}</Message>}
                 <Form onSubmit={submitHandler}>
                     <Form.Group controlId='name'>
@@ -103,11 +111,47 @@ function ProfileScreen({history}) {
                                 
                             </Form.Control>
                     </Form.Group>
-                <Button type='submit' variant="primary" className="my-2">Register</Button>
+                <Button type='submit' variant="primary" className="my-2">Cập Nhật</Button>
             </Form>
             </Col>
             <Col md={9}>
-                <h2>User Orders</h2>
+                <h2>Thông tin các đơn hàng đã mua</h2>
+                {loading ? (
+                    <Loading/>
+                ) : error ? (
+                    <Message variant='danger'>{error}</Message>
+                ) : (
+                    <Table striped responsive className='table-sm'>
+                        <thead>
+                            <tr>
+                                <th>Mã Số</th>
+                                <th>Ngày Đặt</th>
+                                <th>Tổng Tiền</th>
+                                <th>Thanh Toán</th>
+                                <th>Chi Tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {orders.map(order => (
+                                <tr>
+                                    <td>{order._id}</td>
+                                    <td>{order.createdAt.substring(0,10)}</td>
+                                    <td>{order.totalPrice}</td>
+                                    <td>{order.isPaid ? (
+                                        <i class="fas fa-check" style={{color: '#000'}}></i>
+                                    ) : (
+                                        <i class="fas fa-times" style={{color: 'red'}}></i>
+                                    )}</td>
+                                    <td>
+                                        <Link to={`/order/${order._id}`}>
+                                            <Button type="button" class="btn btn-default">Chi Tiết</Button>
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                )}
             </Col>
         </Row>
         

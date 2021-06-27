@@ -11,6 +11,7 @@ import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import OrderScreen from './screens/OrderScreen'
+import UserListScreen from './screens/UserListScreen'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path='/register' component={RegisterScreen} /> {/* Khi link là register?redirect=/* thì nó cũng chạy vào phần sau dấu ? không quan tâm */}
           <Route path='/product/:id' component={ProductScreen} />
           <Route path='/cart/:id?' component={CartScreen} />
+          <Route path='/admin/userlist' component={UserListScreen} />
         </Container>
       </main>
       <Footer/>

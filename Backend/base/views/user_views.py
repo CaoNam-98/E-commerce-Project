@@ -71,7 +71,6 @@ def updateUserProfile(request):
 
 # Get all users
 @api_view(['GET'])
-# Nếu truyền vào token là một user không phải là admin thì sẽ báo lỗi
 @permission_classes([IsAuthenticated])
 def getUsers(request):
     users = User.objects.all()
@@ -79,7 +78,44 @@ def getUsers(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
+# Nếu truyền vào token là một user không phải là admin thì sẽ báo lỗi
+@permission_classes([IsAdminUser])
 def getUserDetails(request, pk):
     user = User.objects.get(id=pk) # search ptu co _id = pk trên url
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data) 
+
+# GET user by ID
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getUserById(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
+
+# Update User
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateUser(request, pk):
+    user = User.objects.get(id=pk)
+
+    data = request.data
+
+    user.first_name = data['name']
+    user.username = data['email']
+    user.email = data['email']
+    user.is_staff = data['isAdmin']
+
+    user.save()
+
+    serializer = UserSerializer(user, many=False)
+
+    return Response(serializer.data)
+
+# Delete user
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def deleteUser(request, pk):
+    userDelete = User.objects.get(id=pk)
+    userDelete.delete()
+    return Response('User đã được Delete')
