@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from './../constants/cartConstants'
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_ITEM_RESET } from './../constants/cartConstants'
 
 export const addToCart = (id, quantity) => async (dispatch, getState) => { // Getstate để lấy ra stata trong reducer
     const {data} = await axios.get(`http://127.0.0.1:8000/products/${id}`)
@@ -25,4 +25,10 @@ export const removeFromCart = (id) => async (dispatch, getState) => {
         }
     })
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+}
+
+export const cartItemReset = () => async (dispatch) => {
+    dispatch({
+        type: CART_ITEM_RESET,
+    })
 }

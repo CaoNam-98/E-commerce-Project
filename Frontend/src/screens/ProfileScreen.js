@@ -29,14 +29,11 @@ function ProfileScreen({history}) {
 
     const orderListMy = useSelector(state => state.orderListMy)
     const { loading, error, orders } = orderListMy
-    console.log(userInfo)
-    console.log(user)
-    console.log(success)
     useEffect(() => {
         if(!userInfo){
             history.push('/login')
         }else{
-            if(!user || !user.name || success) {
+            if(!user || !user.name || success || userInfo._id !== user._id) {
                 dispatch({ type: USER_UPDATE_PROFILES_RESET })
                 dispatch(getUserDetails('profile'))
                 dispatch(listMyOrders())

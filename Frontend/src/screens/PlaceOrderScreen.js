@@ -4,7 +4,8 @@ import {Button, Row, Col, ListGroup, Image, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import './../index.css'
-import { createOrder } from '../actions/orderActions'
+import { createOrder, listMyOrders} from '../actions/orderActions'
+import { cartItemReset } from '../actions/cartActions'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 
 function PlaceOrderScreen({ history }) {
@@ -42,6 +43,8 @@ function PlaceOrderScreen({ history }) {
         if (success) {
             history.push(`/order/${order._id}`)
             dispatch({ type: ORDER_CREATE_RESET })
+            dispatch(listMyOrders())
+            dispatch(cartItemReset())
         }
     }, [history, success, dispatch])
 

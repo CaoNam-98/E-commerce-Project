@@ -1,5 +1,7 @@
 import { 
-    CART_ADD_ITEM, CART_REMOVE_ITEM,
+    CART_ADD_ITEM, 
+    CART_REMOVE_ITEM,
+    CART_ITEM_RESET,
     CART_SAVE_SHIPPING, 
     CART_SAVE_PAYMENT_METHOD
 } from './../constants/cartConstants'
@@ -21,6 +23,11 @@ export const cartReducer = (state = {cartItems: [], shippingAdrress: {}}, action
                     ...state,
                     cartItems: [...state.cartItems, item] // Vừa thay đổi giá trị, vừa trả về giá trị này cho store
                 }
+            }
+
+        case CART_ITEM_RESET:
+            return {
+                cartItems: []
             }
 
         case CART_REMOVE_ITEM:

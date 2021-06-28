@@ -98,7 +98,7 @@ def getUserById(request, pk):
 @permission_classes([IsAuthenticated])
 def updateUser(request, pk):
     user = User.objects.get(id=pk)
-
+    print(user)
     data = request.data
 
     user.first_name = data['name']
