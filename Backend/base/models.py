@@ -10,7 +10,7 @@ class Product(models.Model):
     brand = models.CharField(max_length=255, null=True, blank=True)
     category = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    rating = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank=True)
+    rating = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank=True) # Khi không truyền value thì null=True sẽ giúp value = null
     numReviews = models.IntegerField(null=True, blank=True, default=0)
     price = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank=True)
     countInStock = models.IntegerField(null=True, blank=True, default=0)
