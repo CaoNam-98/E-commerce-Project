@@ -118,10 +118,12 @@ export const getUserDetails = (id) => async (dispatch, getState) => { // id === 
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
+        console.log('dong 121')
         const { data } = await axios.get(
             `http://localhost:8000/users/${id}/`,
             config
         )
+        console.log(data)
         dispatch({
             type: USER_DETAILS_SUCCESS,
             payload: data
@@ -149,7 +151,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => { // id
             }
         }
         const { data } = await axios.put(
-            `http://localhost:8000/users/profile/update/`,
+            `http://localhost:8000/users/profile/update`,
             user,
             config
         )
@@ -158,7 +160,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => { // id
             type: USER_UPDATE_PROFILES_SUCCESS,
             payload: data
         })
-
+        console.log(data)
         dispatch({
             type: USER_LOGIN_SUCCESS,
             payload: data
