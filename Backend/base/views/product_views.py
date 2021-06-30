@@ -43,11 +43,14 @@ def updateProduct(request, pk):
     data = request.data
     product = Product.objects.get(_id=pk)
     product.name = data['name']
+    product.image = data['image']
     product.price = data['price']
     product.brand = data['brand']
     product.countInStock = data['countInStock']
     product.category = data['category']
     product.description = data['description']
+    product.rating = data['rating']
+    product.numReviews = data['numReviews']
     product.save()
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
@@ -58,3 +61,5 @@ def deleteProduct(request, pk):
     productDelete = Product.objects.get(_id=pk)
     productDelete.delete()
     return Response('Delete product success')
+
+    

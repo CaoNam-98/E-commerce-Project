@@ -65,11 +65,15 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_orderItems(self, obj):
+        # obj là các order
         items = obj.orderitem_set.all()
+        # items chứa các order items của order(obj) đó
+        print(items)
         serializer = OrderItemSerializer(items, many=True)
         return serializer.data
 
     def get_shippingAddress(self, obj):
+        print(obj.shippingaddress) # lấy ra các shippingaddress
         try:
             address = ShippingAddressSerializer(
                 obj.shippingaddress, many=False).data
@@ -79,6 +83,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def get_user(self, obj):
         user = obj.user
+        print(user) # get user của item đó
         serializer = UserSerializer(user, many=False)
         return serializer.data
         
