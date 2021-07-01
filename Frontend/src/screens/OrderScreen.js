@@ -1,29 +1,32 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import CheckoutSteps from '../components/CheckoutSteps'
 import {Button, Row, Col, ListGroup, Image} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loading from '../components/Loading'
 import './../index.css'
-import { getOrderDetails } from '../actions/orderActions'
+import { getOrderDetails, deliverOrder } from '../actions/orderActions'
 import { Link } from 'react-router-dom'
+import { ORDER_DELIVER_RESET } from '../constants/orderConstants'
 
-function OrderScreen({ match }) {
-    console.log('mẹ ơi 2')
+function OrderScreen({ match, history }) {
     const orderId = match.params.id
     const dispatch = useDispatch()
     const orderDetails = useSelector(state => state.orderDetails)
     const { order, error, loading } = orderDetails
-    console.log(order)
-    
     const cart = useSelector(state => state.cart)
     var totalItems = cart.cartItems.reduce((acc, item) => {
         return acc + parseInt(item.quantity)
-    },0)
+    }, 0)
 
     // const totalPrice = (parseInt(itemPrice) + parseInt(shippingPrice) + parseInt(taxPrice)).toFixed(2)
-    var orderPrice = 0
+    const orderDeliver = useSelector(state => state.orderDeliver)
+    const { loading: loadingDeliver, success: successDeliver} = orderDeliver
 
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
+    var orderPrice = 0
     if(!loading && !error) {
         orderPrice = (order.orderItems.reduce((acc, item) => {
             return acc + item.price*item.qty
@@ -31,11 +34,18 @@ function OrderScreen({ match }) {
     }
 
     useEffect(() => {
-        console.log('mẹ ơi 1')
+        if(!userInfo) {
+            history.push('/login')
+        }
         if(!order || order._id !== Number(orderId)) {
+            dispatch({type: ORDER_DELIVER_RESET})
             dispatch(getOrderDetails(orderId))
         }
-    }, [dispatch, order, orderId])
+    }, [dispatch, history, userInfo, order, orderId, successDeliver])
+
+    const onHanlerDelivered = () => {
+        dispatch(deliverOrder(order))
+    }
 
     return loading ? (
         <Loading/>
@@ -62,10 +72,8 @@ function OrderScreen({ match }) {
                             {order.shippingAddress.city}, {' '}
                             { order.shippingAddress.country }
                             <br/>
-                            <i class="fas fa-phone"></i>{' '}
-                            Số điện thoại: {order.shippingAddress.phone}
                             {order.isDelivered ? (
-                                <Message variant="success">Đã giao hàng {order.deliveredAt}</Message>
+                                <Message variant="success">Đã giao hàng vào lúc: {order.deliveredAt.substring(0,10)}</Message>
                             ) : (
                                 <Message variant="warning">Chưa giao hàng</Message>
                             )}
@@ -75,7 +83,7 @@ function OrderScreen({ match }) {
                             <i class="fab fa-cc-amazon-pay"></i>{' '}
                             Phương thức: {order.paymentMethod}
                             {order.isPaid ? (
-                                <Message variant="success">Đã thanh toán vào lúc {order.paidAt}</Message>
+                                <Message variant="success">Đã thanh toán</Message>
                             ) : (
                                 <Message variant="warning">Chưa thanh toán</Message>
                             )}
@@ -141,6 +149,17 @@ function OrderScreen({ match }) {
                                 <Col md={6}>{order.totalPrice}</Col>
                             </Row>
                         </ListGroup.Item>
+                            {loadingDeliver && <Loading />}
+                            {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                                <ListGroup.Item>
+                                    <Button 
+                                        type='button' 
+                                        onClick={ onHanlerDelivered }
+                                    >
+                                        Đã Giao Hàng
+                                    </Button>
+                                </ListGroup.Item>
+                            )}   
                     </ListGroup>
                 </Col>
             </Row>

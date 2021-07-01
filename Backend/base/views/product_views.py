@@ -1,7 +1,7 @@
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from base.models import Product
+from base.models import Product, Review
 from base.serializers import ProductSerializer
 from rest_framework import status
 
@@ -62,4 +62,46 @@ def deleteProduct(request, pk):
     productDelete.delete()
     return Response('Delete product success')
 
-    
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def createProductReview(request, pk):
+    user = request.user
+    product = Product.objects.get(_id=pk)
+    data = request.data
+
+    # 1 - Review already exists
+    # Lấy review của product mà do user này đăng có tồn tại không
+    alreadyExists = product.review_set.filter(user=user).exists()
+    print(alreadyExists)
+    if alreadyExists:
+        content = {'detail': 'Product already reviewed'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+
+    # 2 - No Rating or 0
+    elif data['rating'] == 0:
+        content = {'detail': 'Please select a rating'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+
+    # 3 - Create review
+    else:
+        review = Review.objects.create(
+            user=user,
+            product=product,
+            name=user.first_name,
+            rating=data['rating'],
+            comment=data['comment'],
+        )
+        # lấy tất cả review của product này (trong Review có product là khoá ngoại)
+        reviews = product.review_set.all()
+        print(reviews)
+        product.numReviews = len(reviews)
+
+        total = 0
+        for i in reviews:
+            total += i.rating
+
+        product.rating = total / len(reviews)
+        product.save()
+
+        return Response('Review Added')
+        
