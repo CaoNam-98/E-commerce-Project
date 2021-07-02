@@ -9,8 +9,10 @@ import Loading from './../components/Loading'
 import Message from './../components/Message'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 import { createProductReview } from '../actions/productActions'
+import '../index.css'
 
 function ProductScreen({match, history}) { 
+    console.log(history)
     const [quantity, setQuantity] = useState(1)
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState('')
@@ -69,7 +71,7 @@ function ProductScreen({match, history}) {
                                 <Col md={3}>
                                     <ListGroup>
                                         <ListGroup.Item>
-                                            <h5>{productDetail.name}</h5>
+                                            <strong className="product-detail_name">{productDetail.name}</strong>
                                         </ListGroup.Item>
                                         <ListGroup.Item>
                                             <Rating value={productDetail.rating} text={`${productDetail.numReviews} reviews`} color={'#FFFF00'}/>

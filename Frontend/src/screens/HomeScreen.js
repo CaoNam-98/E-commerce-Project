@@ -5,29 +5,40 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions'
 import Loading from './../components/Loading'
 import Message from './../components/Message'
+import Paginate from './../components/Paginate'
+import SearchBox from '../components/SearchBox.js'
 
-function HomeScreen() {
+function HomeScreen({history}) {
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productList)
-    const {error, loading, products} = productList
+    const {error, loading, products, page, pages } = productList
     
+    console.log(history)
+    let keyword = history.location.search 
+    console.log(keyword) // ?keyword=g
+
     useEffect(() => {
-        dispatch(listProducts())
-    }, [dispatch])
+        console.log('nam cao hu hu')
+        dispatch(listProducts(keyword))
+    }, [dispatch, keyword])
 
     return (
         <div>
+            <SearchBox />
             <h1>Danh Sách Sản Phẩm</h1>
             {loading ? <Loading/>
                 : error ? <Message>{error}</Message>
                     :
-                    <Row>
-                        {products.map(product => (
-                            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                                <Product product={product}/>
-                            </Col>
-                        ))}
-                    </Row>
+                    <div>
+                        <Row>
+                            {products.map(product => (
+                                <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                                    <Product product={product}/>
+                                </Col>
+                            ))}
+                        </Row>
+                        <Paginate page={page} pages={pages} keyword={keyword} />
+                    </div>
             }
             
         </div>

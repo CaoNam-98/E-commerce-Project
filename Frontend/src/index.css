@@ -67,3 +67,49 @@ main{
 .list-group-item {
   padding: 0;
 }
+
+/* Search Box */
+.search_input {
+  
+}
+
+.search_input > .search_input-item {
+  line-height: 66px;
+  text-align: center;
+}
+
+.search_input .search_input-form {
+  border-bottom: 2px solid #555;
+  background-color: #fff;
+  text-align: center;
+  padding-bottom: 4px
+}
+
+.search_input-btn {
+  border: none !important;
+  padding: 8px 12px 0px 12px !important;
+}
+
+.search_input-btn:hover {
+  background-color: #fff;
+}
+
+.search_input-icon {
+  font-size: 1.5rem;
+}
+
+/* Pagination */
+.product-list_pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Product detail */
+.product-detail_name {
+  display: block;
+  text-align: center;
+  font-size: 15px;
+  font-family: Roboto,sans-serif;
+  font-weight: 500;
+}

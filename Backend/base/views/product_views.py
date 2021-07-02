@@ -4,12 +4,35 @@ from rest_framework.decorators import api_view, permission_classes
 from base.models import Product, Review
 from base.serializers import ProductSerializer
 from rest_framework import status
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @api_view(['GET'])
-def getProducts(request):
-    products = Product.objects.all()
+def getProducts(request): 
+    query = request.query_params.get('keyword') # {{URL}}/products/?keyword=Kim
+    print('query:', query) # Kim
+    if query == None:
+        query = ''
+    products = Product.objects.filter(name__icontains=query) # lấy ra các product.name có chứa query bên trong
+    
+    page = request.query_params.get('page')
+    paginator = Paginator(products, 12)
+
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        print('nunu 1')
+        products = paginator.page(1)
+        print(products)
+    except EmptyPage:
+        print('nunu 2')
+        products = paginator.page(paginator.num_pages)
+
+    if page == None:
+        page = 1
+    page = int(page)
+
     serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
+    return Response({'products': serializer.data, 'page': page, 'pages': paginator.num_pages})
 
 @api_view(['GET'])
 def getProduct(request, pk):
