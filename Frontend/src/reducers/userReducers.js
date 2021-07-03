@@ -40,6 +40,7 @@ export const userLoginReducer = (state = {}, action) => {
             return { loading: false, error: action.payload }
         
         case USER_LOGOUT:
+            localStorage.removeItem('cartItems')
             return {}
             
         default:

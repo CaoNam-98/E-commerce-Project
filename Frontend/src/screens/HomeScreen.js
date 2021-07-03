@@ -6,7 +6,8 @@ import { listProducts } from '../actions/productActions'
 import Loading from './../components/Loading'
 import Message from './../components/Message'
 import Paginate from './../components/Paginate'
-import SearchBox from '../components/SearchBox.js'
+import SearchBox from '../components/SearchBox'
+import Carousel from '../components/Carousel'
 
 function HomeScreen({history}) {
     const dispatch = useDispatch()
@@ -24,6 +25,7 @@ function HomeScreen({history}) {
 
     return (
         <div>
+            <Carousel />
             <SearchBox />
             <h1>Danh Sách Sản Phẩm</h1>
             {loading ? <Loading/>

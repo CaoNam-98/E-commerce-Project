@@ -88,7 +88,7 @@ function RegisterScreen({location, history}) {
             </Form>
             <Row className="my-2">
                 <Col>
-                    Bạn đã có tài khoản? 
+                    Bạn đã có tài khoản? {' '}
                     <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
                     Đăng Nhập
                     </Link>

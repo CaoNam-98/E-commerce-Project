@@ -21,7 +21,7 @@ function SearchBox() {
 
     return (
         <div>
-            <Row className="search_input">
+            <Row className="search_input" style={{marginTop: "1rem"}}>
                 <Col md={2} className="search_input-item">
                     Trang Sức
                 </Col>
