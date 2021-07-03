@@ -72,6 +72,19 @@ main{
   font-size: 0.65rem;
   padding-left: 5px;
 }
+/* Cart */
+.message-error {
+  margin-top: 1rem;
+}
+
+/* Product Detail */
+.product_detail .card-btn {
+  display: inline;
+}
+
+.product_detail .list-group {
+  margin: 0;
+}
 
 /* Place Order */
 .list-group-item {
@@ -108,8 +121,18 @@ main{
   font-size: 1.5rem;
 }
 
+.btn-outline-secondary:not([disabled]):not(.disabled):active, .btn-outline-secondary:not([disabled]):not(.disabled):focus, .btn-outline-secondary:not([disabled]):not(.disabled):hover {
+  color: #000 !important;
+  background: none !important;
+}
+
+.form-control:focus {
+  background: none !important;
+  box-shadow: none !important;
+}
 /* Pagination */
 .product-list_pagination {
+  margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,4 +183,231 @@ main{
   .carousel-caption h2 {
     font-size: 2.5vw;
   }
+}
+
+/* Footer */
+.footer {
+  margin-top: 3.5rem;
+}
+
+.footer-top {
+  border-top: 4px solid #ee4d2d;
+  font-family: Roboto, sans-serif;
+  background-color: #f5f5f5;
+  padding-bottom: 1.5rem;
+}
+
+.footer__row {
+  padding-top: 2rem;
+}
+
+.footer__heading {
+  margin: 0px;
+  font-size: 14px;
+  color: #737373;
+  margin-bottom: 20px;
+}
+
+.footer__list {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+  color: #898073
+}
+
+.footer__item + .footer__item{
+  margin-top: 8px;
+}
+
+.footer__item-link {
+  font-size: 13px;
+  text-decoration: none;
+  color: #282828;
+}
+
+.footer__item-link:hover {
+  color: #ee4d2d;
+}
+
+.grid__column-2-4-footer:nth-child(3) {
+  margin-left: auto;
+}
+
+.footer__item-icon {
+  margin-right: 3px;
+  font-size: 1.45rem;
+}
+
+.footer__item-qr {
+  width: 84px;
+  border: 1px solid #e4e4e4;
+}
+
+.footer__item-apps {
+  width: 88px;
+  height: 1.7rem;
+}
+
+.footer__qr-code-apps {
+  display: flex;
+}
+
+.footer__apps {
+  padding-left: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.footer-bottom {
+  background-color: #f5f5f5;
+  padding: 40px 0 36px 0;
+}
+
+.footer-bottom__list {
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-bottom__item {
+  position: relative;
+  text-align: center;
+}
+
+.footer-bottom__item-separate::after {
+  content: "";
+  display: block;
+  height: 1.6rem;
+  left: 0;
+  top: 50%;
+  border-left: 1px solid #dfdfdf;
+  position: absolute;
+  transform: translateY(-50%);
+}
+
+.footer-bottom__item-link {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1.3rem;
+  padding: 0 25px;
+}
+
+.footer__company-name {
+  margin-top: 60px;
+  font-size: 1.9rem;
+  text-align: center;
+}
+
+.footer__company-location {
+  margin-top: 15px;
+  font-size: 1.9rem;
+  text-align: center;
+}
+
+.footer-bottom-1 {
+  background-color: #d9d9d9;
+  height: 3.5rem;
+}
+
+.footer__item-link > span {
+  position: relative; 
+  top: -3px;
+}
+
+/* Cart Product */
+.cart {
+  padding-bottom: 5rem;
+}
+
+.list-group-item > .row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart_product-name {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.fa-trash {
+  font-size: 1.4rem;
+}
+
+.list-group {
+  margin-top: 1rem;
+}
+
+.col-md-4 > .list-group {
+  margin-top: 2.8rem;
+}
+
+.card-btn {
+  width: 100%;
+}
+
+/* User Address */
+.nav > .nav-item{
+  flex-wrap: wrap;
+  margin: 0px 10px 0px 10px;
+}
+
+.btn-primary {
+  width: 100%;
+}
+
+/* Profile User */
+.form__current-user {
+  margin-top: 1.2rem;
+}
+
+.user__profile-title-order,
+.user__profile-value-order  {
+  text-align: center;
+}
+
+.fas.fa-check {
+  color: green;
+}
+
+.fas.fa-times {
+  color: red;
+}
+
+/* Place order */
+.info__place-order > .list-group {
+  margin-top: 0;
+}
+
+.place-order > .list-group {
+  margin-top: 3rem;
+}
+
+/*  User List, Product List */
+.admin__list-info > h3,
+.product__list-info > h3,
+.order__list-info > h3 {
+  padding: 1rem 0;
+}
+
+.admin__list-info .list__title-info,
+.admin__list-info .list__title-value,
+.product__list-info .list__title-info,
+.product__list-info .list__title-value,
+.order__list-info .list__title-info,
+.order__list-info .list__title-value {
+  text-align: center;
+}
+
+.admin__list-info .fa-trash,
+.product__list-info .fa-trash,
+.order__list-info .fa-trash {
+  font-size: 1rem;
+}
+
+.product__list-info .btn-primary {
+  width: 40%;
 }

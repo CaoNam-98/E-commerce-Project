@@ -64,9 +64,9 @@ function ProfileScreen({history}) {
             <Col md={3}>
                 <h2>Khách Hàng</h2>
                 {message && <Message variant='danger'>{message}</Message>}
-                <Form onSubmit={submitHandler}>
+                <Form onSubmit={submitHandler} className="form__current-user">
                     <Form.Group controlId='name'>
-                        <Form.Label>Name</Form.Label>
+                        <Form.Label>Tên Khách Hàng</Form.Label>
                         <Form.Control 
                             type='name' 
                             placeholder='Enter Name'
@@ -76,7 +76,7 @@ function ProfileScreen({history}) {
                             </Form.Control>
                     </Form.Group>
                     <Form.Group controlId='email' className="my-2">
-                        <Form.Label>Email address</Form.Label>
+                        <Form.Label>Email</Form.Label>
                         <Form.Control 
                             type='email' 
                             placeholder='Enter Email'
@@ -87,7 +87,7 @@ function ProfileScreen({history}) {
                             </Form.Control>
                     </Form.Group>
                     <Form.Group controlId='password' className="my-2">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label>Mật Khẩu</Form.Label>
                         <Form.Control 
                             type='password' 
                             placeholder='Enter Password'
@@ -98,7 +98,7 @@ function ProfileScreen({history}) {
                             </Form.Control>
                     </Form.Group>
                     <Form.Group controlId='confirmPassword' className="my-2">
-                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Label>Nhập Lại Mật Khẩu</Form.Label>
                         <Form.Control 
                             type='password' 
                             placeholder='Confirm Password'
@@ -120,7 +120,7 @@ function ProfileScreen({history}) {
                 ) : (
                     <Table striped responsive className='table-sm'>
                         <thead>
-                            <tr>
+                            <tr className="user__profile-title-order">
                                 <th>Mã Số</th>
                                 <th>Ngày Đặt</th>
                                 <th>Tổng Tiền</th>
@@ -130,18 +130,18 @@ function ProfileScreen({history}) {
                         </thead>
                         <tbody>
                             {orders.map(order => (
-                                <tr>
+                                <tr className="user__profile-value-order">
                                     <td>{order._id}</td>
                                     <td>{order.createdAt.substring(0,10)}</td>
                                     <td>{order.totalPrice}</td>
                                     <td>{order.isPaid ? (
-                                        <i class="fas fa-check" style={{color: '#000'}}></i>
+                                        <i class="fas fa-check"></i>
                                     ) : (
-                                        <i class="fas fa-times" style={{color: 'red'}}></i>
+                                        <i class="fas fa-times"></i>
                                     )}</td>
                                     <td>
                                         <Link to={`/order/${order._id}`}>
-                                            <Button type="button" class="btn btn-default">Chi Tiết</Button>
+                                            <Button type="button" class="btn btn-default">Xem Chi Tiết</Button>
                                         </Link>
                                     </td>
                                 </tr>

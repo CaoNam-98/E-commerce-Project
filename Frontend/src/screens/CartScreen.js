@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button } from 'react-bootstrap'
 import Message from './../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
+import '../index.css'
 
 function CartScreen({ match, location, history}) {
     const productId = match.params.id
@@ -27,7 +28,7 @@ function CartScreen({ match, location, history}) {
     }
 
     return (
-        <Row>
+        <Row className="cart">
             <Col md={8}>
                 <h3>Giỏ Hàng</h3>
                 {cartItems.length === 0 ? (
@@ -40,12 +41,12 @@ function CartScreen({ match, location, history}) {
                         {
                             cartItems.map(item => (
                                 <ListGroup.Item key={item.product}>
-                                    <Row>
+                                    <Row className="cart__product-item">
                                         <Col md={2}>
                                             <Image src={item.image} alt={item.name} rounded fluid/>
                                         </Col>
                                         <Col md={4}>
-                                            <Link to='/'>{item.name}</Link>
+                                            <Link to='/' className="cart_product-name">{item.name}</Link>
                                         </Col>
                                         <Col md={2}>
                                             {item.price}Đ
@@ -79,8 +80,8 @@ function CartScreen({ match, location, history}) {
             <Col md={4}>
                 <ListGroup>
                     <ListGroup.Item>
-                        <Row>
-                            <Col md={4}>
+                        <Row className="total-price">
+                            <Col md={7}>
                                 <h5>
                                     Tổng Tiền  
                                     ({cartItems.reduce((total, item) => {
@@ -88,7 +89,7 @@ function CartScreen({ match, location, history}) {
                                     }, 0)})
                                 </h5>
                             </Col>
-                            <Col md={3}>
+                            <Col md={5}>
                                 <h5>
                                     {cartItems.reduce((total, item) => {
                                         return total + item.quantity*item.price
@@ -104,7 +105,7 @@ function CartScreen({ match, location, history}) {
                             disabled={cartItems.length === 0 ? true : false}
                             onClick={checkoutHandler}
                         >
-                            PROCEED TO CHECKOUT
+                            Thanh Toán
                         </Button>
                     </ListGroup.Item>
                 </ListGroup>

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../components/Loading'
 import Message from '../components/Message'
 import { listUsers, deleteUser } from '../actions/userActions'
+import '../index.css'
 
 function UserListScreen({ history }) {
     const dispatch = useDispatch()
@@ -34,7 +35,7 @@ function UserListScreen({ history }) {
     }
 
     return (
-        <div>
+        <div className="admin__list-info">
             <h3>Thông Tin Các Tài Khoản</h3>
             {loading
                 ? (<Loading />)
@@ -43,7 +44,7 @@ function UserListScreen({ history }) {
                     : (
                         <Table striped bordered hover responsive className='table-sm'>
                             <thead>
-                                <tr>
+                                <tr className="list__title-info">
                                     <th>Mã Số</th>
                                     <th>Tên</th>
                                     <th>Email</th>
@@ -54,7 +55,7 @@ function UserListScreen({ history }) {
 
                             <tbody>
                                 {users.map(user => (
-                                    <tr key={user._id}>
+                                    <tr key={user._id} className="list__title-value">
                                         <td>{user._id}</td>
                                         <td>{user.name}</td>
                                         <td>{user.email}</td>

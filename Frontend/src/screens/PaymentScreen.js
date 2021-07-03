@@ -66,7 +66,7 @@ function PaymentScreen({history}) {
                         onChange={() => setPaymentMethod('Payment on delivery')}
                     />
                 </Form.Group>
-                <Button type='submit' variant="primary" className="my-2">Continue</Button>
+                <Button type='submit' variant="primary" className="my-2">Tiếp Tục</Button>
             </Form>
         </FormContainer>
     )

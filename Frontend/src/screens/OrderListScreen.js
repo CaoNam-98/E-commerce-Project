@@ -24,8 +24,8 @@ function OrderListScreen({ history }) {
     }, [dispatch, history, userInfo])
 
     return (
-        <div>
-            <h1>Danh Sách Đơn Hàng</h1>
+        <div className="order__list-info">
+            <h3>Danh Sách Đơn Hàng</h3>
             {loading
                 ? (<Loading />)
                 : error
@@ -33,7 +33,7 @@ function OrderListScreen({ history }) {
                     : (
                         <Table striped bordered hover responsive className='table-sm'>
                             <thead>
-                                <tr>
+                                <tr className="list__title-info">
                                     <th>Mã Số</th>
                                     <th>Khách Hàng</th>
                                     <th>Ngày</th>
@@ -46,7 +46,7 @@ function OrderListScreen({ history }) {
 
                             <tbody>
                                 { orders.map(order => (
-                                    <tr key={order._id}>
+                                    <tr key={order._id} className="list__title-value">
                                         <td>{order._id}</td>
                                         <td>{order.user && order.user.name}</td>
                                         <td>{order.createdAt.substring(0, 10)}</td>

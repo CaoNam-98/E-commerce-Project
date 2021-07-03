@@ -3,7 +3,7 @@ import { Alert } from 'react-bootstrap'
 
 function Message({children}) {
     return (
-        <Alert variant='danger'>
+        <Alert variant='danger' className="message-error">
             {children}
         </Alert>
     )

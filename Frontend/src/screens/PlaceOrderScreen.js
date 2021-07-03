@@ -52,7 +52,7 @@ function PlaceOrderScreen({ history }) {
         <div>
             <CheckoutSteps />
             <Row>
-                <Col md={8}> 
+                <Col md={8} className="info__place-order"> 
                     <ListGroup variant="flush">
                         <ListGroup.Item >
                             <h3>Địa Chỉ Giao Hàng</h3>
@@ -95,7 +95,7 @@ function PlaceOrderScreen({ history }) {
                         </ListGroup.Item>
                     </ListGroup>
                 </Col>
-                <Col md={4}>
+                <Col md={4} className="place-order">
                     <ListGroup>
                         <ListGroup.Item>
                             <h3>Hoá Đơn</h3>
@@ -103,7 +103,7 @@ function PlaceOrderScreen({ history }) {
                         <ListGroup.Item>
                             <Row>
                                 <Col md={6}>Tổng tiền hàng:</Col>
-                                <Col md={6}>{itemPrice}</Col>
+                                <Col md={6}>{itemPrice.toFixed(3)}</Col>
                             </Row>
                         </ListGroup.Item>
                         <ListGroup.Item>
@@ -112,25 +112,27 @@ function PlaceOrderScreen({ history }) {
                                 {totalItems > 50 ? (
                                     <Col md={6}>0</Col>
                                 ):(
-                                    <Col md={6}>{shippingPrice}</Col>
+                                    <Col md={6}>{shippingPrice.toFixed(3)}</Col>
                                 )}     
                             </Row>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Row>
                                 <Col md={6}>Thuế:</Col>
-                                <Col md={6}>{taxPrice}</Col>
+                                <Col md={6}>{taxPrice.toFixed(3)}</Col>
                             </Row>
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Row>
                                 <Col md={6}>Tổng Thanh Toán:</Col>
-                                <Col md={6}>{totalPrice}</Col>
+                                <Col md={6}>{totalPrice.toFixed(3)}</Col>
                             </Row>
                         </ListGroup.Item>
-                        <ListGroup.Item>
-                                {error && <Message variant='danger'>{error}</Message>}
-                            </ListGroup.Item>
+                            {error && 
+                                <ListGroup.Item>
+                                    <Message variant='danger'>{error}</Message>
+                                </ListGroup.Item>
+                            }
                         <ListGroup.Item>
                             <Button type='submit' variant="primary" className="my-2" onClick={placeOrderHandler}>Đặt Hàng</Button>
                         </ListGroup.Item>

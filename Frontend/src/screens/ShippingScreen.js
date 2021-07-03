@@ -8,6 +8,7 @@ import FormContainer from '../components/FormContainer'
 import {register} from '../actions/userActions'
 import {saveShippingAddress} from '../actions/shippingAction'
 import CheckoutSteps from '../components/CheckoutSteps'
+import '../index.css'
 
 function ShippingScreen({history}) {
     const shipping = useSelector(state => state.cart)
@@ -89,7 +90,7 @@ function ShippingScreen({history}) {
                             
                         </Form.Control>
                 </Form.Group>
-                <Button type='submit' variant="primary" className="my-2">Continue</Button>
+                <Button type='submit' variant="primary" className="my-2 .card-btn">Tiếp Tục</Button>
             </Form>
         </FormContainer>
     )

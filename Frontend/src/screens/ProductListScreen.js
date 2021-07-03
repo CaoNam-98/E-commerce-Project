@@ -44,7 +44,7 @@ function ProductListScreen({ history }) {
     }
 
     return (
-        <div>
+        <div className="product__list-info">
             <Row>
                 <Col className="my-2">
                     <h3>Thông Tin Các Sản Phẩm</h3>
@@ -66,19 +66,19 @@ function ProductListScreen({ history }) {
                         <div>
                             <Table striped bordered hover responsive className='table-sm my-2'>
                                 <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Category</th>
-                                        <th>Brand</th>
+                                    <tr className="list__title-info">
+                                        <th>Mã Số</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Loại Hàng</th>
+                                        <th>Nhãn Hiệu</th>
                                         <th></th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     {products.map(product => (
-                                        <tr key={product._id}>
+                                        <tr key={product._id} className="list__title-value">
                                             <td>{product._id}</td>
                                             <td>{product.name}</td>
                                             <td>{product.price}</td>
