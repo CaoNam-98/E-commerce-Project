@@ -56,7 +56,7 @@ function Header() {
                         ):(
                             <LinkContainer to="/login">
                                 <Nav.Link>
-                                    <i class="fas fa-user"></i>Login
+                                    <i class="fas fa-user"></i>{' '}Login
                                 </Nav.Link>
                             </LinkContainer> 
                         )} 

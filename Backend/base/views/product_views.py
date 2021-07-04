@@ -15,7 +15,7 @@ def getProducts(request):
     products = Product.objects.filter(name__icontains=query) # lấy ra các product.name có chứa query bên trong
     
     page = request.query_params.get('page')
-    paginator = Paginator(products, 12)
+    paginator = Paginator(products, 16)
 
     try:
         products = paginator.page(page)
