@@ -8,11 +8,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @api_view(['GET'])
 def getProducts(request): 
-    query = request.query_params.get('keyword') # {{URL}}/products/?keyword=Kim
-    print('query:', query) # Kim
+    query = request.query_params.get('keyword') 
     if query == None:
         query = ''
-    products = Product.objects.filter(name__icontains=query) # lấy ra các product.name có chứa query bên trong
+    products = Product.objects.filter(name__icontains=query) 
     
     page = request.query_params.get('page')
     paginator = Paginator(products, 16)
@@ -20,11 +19,8 @@ def getProducts(request):
     try:
         products = paginator.page(page)
     except PageNotAnInteger:
-        print('nunu 1')
         products = paginator.page(1)
-        print(products)
     except EmptyPage:
-        print('nunu 2')
         products = paginator.page(paginator.num_pages)
 
     if page == None:
@@ -43,7 +39,7 @@ def getTopProducts(request):
 
 @api_view(['GET'])
 def getProduct(request, pk):
-    product = Product.objects.get(_id=pk) # search ptu co _id = pk trên url
+    product = Product.objects.get(_id=pk) 
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
@@ -100,9 +96,7 @@ def createProductReview(request, pk):
     data = request.data
 
     # 1 - Review already exists
-    # Lấy review của product mà do user này đăng có tồn tại không
     alreadyExists = product.review_set.filter(user=user).exists()
-    print(alreadyExists)
     if alreadyExists:
         content = {'detail': 'Product already reviewed'}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
@@ -121,9 +115,7 @@ def createProductReview(request, pk):
             rating=data['rating'],
             comment=data['comment'],
         )
-        # lấy tất cả review của product này (trong Review có product là khoá ngoại)
         reviews = product.review_set.all()
-        print(reviews)
         product.numReviews = len(reviews)
 
         total = 0

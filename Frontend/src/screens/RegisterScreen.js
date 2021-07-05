@@ -13,7 +13,6 @@ function RegisterScreen({location, history}) {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState('')
-    // Khi thành công do location.search (chuỗi sau dấu ? là null) => redirect sang /
     var redirect = location.search ? location.search.split('=')[1] : '/' 
     const userRegister = useSelector(state => state.userRegister)
     const { error, loading, userInfo } = userRegister
@@ -23,7 +22,7 @@ function RegisterScreen({location, history}) {
         if(userInfo){
             history.push(redirect)
         }
-    }) // bỏ cái này , [history, userInfo, redirect] cũng được
+    }) 
 
     const submitHandler = (e) => {
         e.preventDefault()

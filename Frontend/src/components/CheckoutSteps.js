@@ -1,9 +1,7 @@
-import React from 'react' //rfce
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
+import React from 'react'
+import { Navbar, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import './../index.css'
-import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '../actions/userActions'
 
 function CheckoutSteps({ step1, step2, step3, step4 }) {
     return (

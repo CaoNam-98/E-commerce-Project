@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import {Form, Button, Row, Col} from 'react-bootstrap'
+import {Form, Button} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../components/Loading'
 import Message from '../components/Message'
@@ -8,8 +8,6 @@ import FormContainer from '../components/FormContainer'
 import { updateProduct } from '../actions/productActions'
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 import { detailsProduct } from '../actions/productActions'
-import {PRODUCT_DETAILS_RESET} from '../constants/productConstants'
-import axios from 'axios'
 
 function ProductEditScreen({ history, match }) {
     const productId = match.params.id
@@ -23,10 +21,9 @@ function ProductEditScreen({ history, match }) {
     const [price, setPrice] = useState(0)
     const [countInStock, setCountInStock] = useState(0)
     const [numReviews, setNumReviews] = useState(0)
-    const [uploading, setUploading] = useState(false)
 
     const productDetails = useSelector(state => state.productDetails)
-    const { error, loading, productDetail } = productDetails
+    const { productDetail } = productDetails
     const productUpdate = useSelector(state => state.productUpdate)
     const { error: errorUpdate, loading: loadingUpdate, success: successUpdate } = productUpdate
 

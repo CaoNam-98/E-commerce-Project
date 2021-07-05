@@ -1,12 +1,8 @@
-import React, {useState, useEffect} from 'react'
-import { Link } from 'react-router-dom'
-import {Form, Button, Row, Col} from 'react-bootstrap'
+import React, {useState} from 'react'
+import {Form, Button} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import Loading from '../components/Loading'
-import Message from '../components/Message'
 import FormContainer from '../components/FormContainer'
-import {register} from '../actions/userActions'
-import {saveShippingAddress, savePaymentMethod} from '../actions/shippingAction'
+import { savePaymentMethod } from '../actions/shippingAction'
 import CheckoutSteps from '../components/CheckoutSteps'
 
 function PaymentScreen({history}) {

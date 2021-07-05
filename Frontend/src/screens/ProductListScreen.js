@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,24 +12,13 @@ function ProductListScreen({ history }) {
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productList)
     const { loading, error, products, page, pages } = productList
-
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-    
     const productDelete = useSelector(state => state.productDelete)
-    const { loading: loadingDelete, error: errorDelete, success: successDelete } = productDelete
-    console.log(loadingDelete)
-    console.log(successDelete)
-    const productCreate = useSelector(state => state.productCreate)
-    const { loading: loadingCreate, error: errorCreate, success: successCreate, product: createdProduct } = productCreate
-    // const productDelete = useSelector(state => state.productDelete)
-    // const { success} = productDelete
-
+    const { success: successDelete } = productDelete
     let keyword = history.location.search
-    console.log(keyword)
 
     useEffect(() => {
-        console.log('dòng 22')
         if (userInfo && userInfo.isAdmin) {
             dispatch(listProducts(keyword))
         } else {

@@ -5,7 +5,6 @@ import '../index.css'
 
 function Paginate({ pages, page, keyword = '', isAdmin = false }) {
     if (keyword) {
-        console.log(keyword.split('?keyword='))
         keyword = keyword.split('?keyword=')[1].split('&')[0]
     }
     

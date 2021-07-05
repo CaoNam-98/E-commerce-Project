@@ -10,9 +10,7 @@ from datetime import datetime
 @permission_classes([IsAuthenticated])
 def addOrderItems(request):
     user = request.user
-    print(user)
     data = request.data
-    print(data)
     orderItems = data['orderItems']
 
     if orderItems and len(orderItems) == 0:
@@ -20,7 +18,6 @@ def addOrderItems(request):
     else:
 
         # (1) Create order
-
         order = Order.objects.create(
             user=user,
             paymentMethod=data['paymentMethod'],
@@ -30,7 +27,6 @@ def addOrderItems(request):
         )
 
         # (2) Create shipping address
-
         shipping = ShippingAddress.objects.create(
             order=order,
             address=data['shippingAddress']['address'],

@@ -12,18 +12,14 @@ import { createProductReview } from '../actions/productActions'
 import '../index.css'
 
 function ProductScreen({match, history}) { 
-    console.log(history)
     const [quantity, setQuantity] = useState(1)
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState('')
     const dispatch = useDispatch()
     const productDetails = useSelector(state => state.productDetails)
     const { error, loading, productDetail } = productDetails
-    console.log(productDetails)
-
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-
     const productCreateReview = useSelector(state => state.productCreateReview)
 
     const {
@@ -32,9 +28,7 @@ function ProductScreen({match, history}) {
         success: successProductReview,
     } = productCreateReview
 
-    console.log('render')
     useEffect(() => {
-        console.log('chiến Thắng')
         if (successProductReview) {
             setRating(0)
             setComment('')
@@ -48,7 +42,6 @@ function ProductScreen({match, history}) {
     }
 
     const submitHandler = (e) => {
-        console.log('huhu 1')
         e.preventDefault()
         dispatch(createProductReview(
             match.params.id, {

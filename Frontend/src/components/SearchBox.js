@@ -1,14 +1,11 @@
 import React, {useState} from 'react'
 import { Button, Row, Col, Form } from 'react-bootstrap'
-// Ta sử dụng history thay vì {history} vì không có router nào gọi trực tiếp đến component này cả mà nó thông qua component khác
 import { useHistory } from 'react-router-dom' 
 import './../index.css'
 
 function SearchBox() {
     const [keyword, setKeyword] = useState('')
-    
     let history = useHistory()
-    console.log(history)
 
     const submitHandler = (e) => {
         e.preventDefault();

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import CheckoutSteps from '../components/CheckoutSteps'
+import React, { useEffect } from 'react'
 import {Button, Row, Col, ListGroup, Image} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -19,14 +18,12 @@ function OrderScreen({ match, history }) {
         return acc + parseInt(item.quantity)
     }, 0)
 
-    // const totalPrice = (parseInt(itemPrice) + parseInt(shippingPrice) + parseInt(taxPrice)).toFixed(2)
     const orderDeliver = useSelector(state => state.orderDeliver)
     const { loading: loadingDeliver, success: successDeliver} = orderDeliver
-
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-
     var orderPrice = 0
+    
     if(!loading && !error) {
         orderPrice = (order.orderItems.reduce((acc, item) => {
             return acc + item.price*item.qty
@@ -37,21 +34,22 @@ function OrderScreen({ match, history }) {
         if(!userInfo) {
             history.push('/login')
         }
-        if(!order || order._id !== Number(orderId)) {
-            dispatch({type: ORDER_DELIVER_RESET})
+        if (!order || order._id !== Number(orderId)) {
+            dispatch({ type: ORDER_DELIVER_RESET })
             dispatch(getOrderDetails(orderId))
         }
-    }, [dispatch, history, userInfo, order, orderId, successDeliver])
+    }, [dispatch, history, userInfo, order, orderId, successDeliver, loadingDeliver])
 
-    const onHanlerDelivered = () => {
+    const onHandlerDelivered = () => {
         dispatch(deliverOrder(order))
+        dispatch(getOrderDetails(orderId))
     }
 
-    return loading ? (
+    return loadingDeliver ? (
         <Loading/>
     ): error ? (
         <Message variant='danger'>{error}</Message>
-    ) : (
+    ) : order ? (
         <div>
             <h3>Mã đơn hàng: {order._id}</h3>
             <Row>
@@ -72,8 +70,8 @@ function OrderScreen({ match, history }) {
                             {order.shippingAddress.city}, {' '}
                             { order.shippingAddress.country }
                             <br/>
-                            {order.isDelivered ? (
-                                <Message variant="success">Đã giao hàng vào lúc: {order.deliveredAt.substring(0,10)}</Message>
+                            {successDeliver ? (
+                                <Message variant="success">Đã giao hàng</Message>
                             ) : (
                                 <Message variant="warning">Chưa giao hàng</Message>
                             )}
@@ -154,7 +152,7 @@ function OrderScreen({ match, history }) {
                                 <ListGroup.Item>
                                     <Button 
                                         type='button' 
-                                        onClick={ onHanlerDelivered }
+                                        onClick={ onHandlerDelivered }
                                     >
                                         Đã Giao Hàng
                                     </Button>
@@ -164,7 +162,7 @@ function OrderScreen({ match, history }) {
                 </Col>
             </Row>
         </div>
-    )
+    ) : null
 }
 
 export default OrderScreen

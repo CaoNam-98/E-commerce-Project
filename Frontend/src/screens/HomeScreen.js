@@ -13,13 +13,9 @@ function HomeScreen({history}) {
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productList)
     const {error, loading, products, page, pages } = productList
-    
-    console.log(history)
     let keyword = history.location.search 
-    console.log(keyword) // ?keyword=g
 
     useEffect(() => {
-        console.log('nam cao hu hu')
         dispatch(listProducts(keyword))
     }, [dispatch, keyword])
 

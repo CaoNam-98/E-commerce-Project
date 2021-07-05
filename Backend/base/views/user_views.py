@@ -15,25 +15,20 @@ from rest_framework import status
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-        # print(data): lấy refresh và access
         serializer = UserSerializerWithToken(self.user).data
-        # print(serializer): lấy id, _id, username, email,...
-        # print(serializer.items)
-        for k,v in serializer.items(): # k là key, v là value
-            # print(k,v, 'dòng 21')
+        for k,v in serializer.items():
             data[k] = v
         return data
 
-class MyTokenObtainPairView(TokenObtainPairView): # Khi bên url gọi tới hàm này thì nó chạy vào TokenObtainPairSerializer
+class MyTokenObtainPairView(TokenObtainPairView): 
     serializer_class = MyTokenObtainPairSerializer
 
 @api_view(['POST'])
 def registerUser(request):
     data = request.data
     try:
-        # Thông tin user email không được trung với các user đã có
         user = User.objects.create(
-            first_name=data['name'], # first name thay cho name trong serializer
+            first_name=data['name'], 
             username=data['email'],
             email=data['email'],
             password=make_password(data['password'])
@@ -43,7 +38,6 @@ def registerUser(request):
     except:
         message = {'detail': 'User with this email already exists'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
-
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -65,11 +59,9 @@ def updateUserProfile(request):
         user.password = make_password(data['password'])
     
     user.save()
-    # Phải có token mới truy cập vào được nên dùng UserSerializerWithToken
     serializer = UserSerializerWithToken(user, many=False) 
     return Response(serializer.data)
 
-# Get all users
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getUsers(request):
@@ -78,14 +70,12 @@ def getUsers(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
-# Nếu truyền vào token là một user không phải là admin thì sẽ báo lỗi
 @permission_classes([IsAdminUser])
 def getUserDetails(request, pk):
-    user = User.objects.get(id=pk) # search ptu co _id = pk trên url
+    user = User.objects.get(id=pk) 
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data) 
 
-# GET user by ID
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getUserById(request, pk):
@@ -93,12 +83,10 @@ def getUserById(request, pk):
     serializer = UserSerializer(user)
     return Response(serializer.data)
 
-# Update User
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def updateUser(request, pk):
     user = User.objects.get(id=pk)
-    print(user)
     data = request.data
 
     user.first_name = data['name']
@@ -112,7 +100,6 @@ def updateUser(request, pk):
 
     return Response(serializer.data)
 
-# Delete user
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
 def deleteUser(request, pk):

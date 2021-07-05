@@ -9,10 +9,7 @@ import {
     USER_DETAILS_REQUEST,
     USER_DETAILS_SUCCESS,
     USER_DETAILS_FAIL,
-    USER_UPDATE_PROFILES_REQUEST,
     USER_UPDATE_PROFILES_SUCCESS,
-    USER_UPDATE_PROFILES_FAIL,
-    USE_UPDATE_PROFILES_RESET,
     USER_DETAILS_RESET,
     USER_LIST_REQUEST,
     USER_LIST_SUCCESS,
@@ -122,12 +119,10 @@ export const getUserDetails = (id) => async (dispatch, getState) => { // id === 
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        console.log('dong 121')
         const { data } = await axios.get(
             `http://localhost:8000/users/${id}/`,
             config
         )
-        console.log(data)
         dispatch({
             type: USER_DETAILS_SUCCESS,
             payload: data
@@ -159,12 +154,10 @@ export const updateUserProfile = (user) => async (dispatch, getState) => { // id
             user,
             config
         )
-        console.log(data)
         dispatch({
             type: USER_UPDATE_PROFILES_SUCCESS,
             payload: data
         })
-        console.log(data)
         dispatch({
             type: USER_LOGIN_SUCCESS,
             payload: data
@@ -197,7 +190,6 @@ export const listUsers = () => async (dispatch, getState) => {
             'http://localhost:8000/users/',
             config
         )
-        console.log(data)
         dispatch({
             type: USER_LIST_SUCCESS,
             payload: data
@@ -232,7 +224,6 @@ export const deleteUser = (id) => async (dispatch, getState) => {
             config
         )
 
-        console.log(data)
         dispatch({
             type: USER_DELETE_SUCCESS,
             payload: data

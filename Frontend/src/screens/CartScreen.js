@@ -24,7 +24,7 @@ function CartScreen({ match, location, history}) {
     }
 
     const checkoutHandler = () => {
-        history.push('/login?redirect=shipping') // nếu đã login thì redirect đến /shipping, nếu chưa thì sang /login
+        history.push('/login?redirect=shipping') 
     }
 
     return (

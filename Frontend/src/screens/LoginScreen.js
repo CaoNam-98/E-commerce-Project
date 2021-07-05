@@ -10,7 +10,6 @@ import {login} from '../actions/userActions'
 function LoginScreen({location, history}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    // Khi thành công do location.search (chuỗi sau dấu ? là null) => redirect sang /
     var redirect = location.search ? location.search.split('=')[1] : '/' 
     const userLogin = useSelector(state => state.userLogin)
     const { error, loading, userInfo } = userLogin
@@ -20,7 +19,7 @@ function LoginScreen({location, history}) {
         if(userInfo){
             history.push(redirect)
         }
-    }) // bỏ cái này , [history, userInfo, redirect] cũng được
+    }) 
 
     const submitHandler = (e) => {
         e.preventDefault()

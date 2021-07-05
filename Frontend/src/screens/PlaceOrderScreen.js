@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import CheckoutSteps from '../components/CheckoutSteps'
-import {Button, Row, Col, ListGroup, Image, Form } from 'react-bootstrap'
+import {Button, Row, Col, ListGroup, Image } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import './../index.css'

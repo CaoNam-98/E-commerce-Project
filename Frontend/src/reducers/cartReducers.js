@@ -21,7 +21,7 @@ export const cartReducer = (state = {cartItems: [], shippingAdrress: {}}, action
             }else{
                 return {
                     ...state,
-                    cartItems: [...state.cartItems, item] // Vừa thay đổi giá trị, vừa trả về giá trị này cho store
+                    cartItems: [...state.cartItems, item] 
                 }
             }
 

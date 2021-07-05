@@ -32,7 +32,7 @@ function App() {
           <Route path='/placeorder' component={PlaceOrderScreen} />
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/profile' component={ProfileScreen} />
-          <Route path='/register' component={RegisterScreen} /> {/* Khi link là register?redirect=/* thì nó cũng chạy vào phần sau dấu ? không quan tâm */}
+          <Route path='/register' component={RegisterScreen} /> 
           <Route path='/product/:id' component={ProductScreen} />
           <Route path='/cart/:id?' component={CartScreen} />
           <Route path='/admin/userlist' component={UserListScreen} />

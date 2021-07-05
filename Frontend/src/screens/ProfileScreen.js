@@ -4,11 +4,9 @@ import {Form, Button, Row, Col, Table} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../components/Loading'
 import Message from '../components/Message'
-import FormContainer from '../components/FormContainer'
 import { getUserDetails,  updateUserProfile} from '../actions/userActions'
 import { USER_UPDATE_PROFILES_RESET } from '../constants/userConstants'
 import {listMyOrders} from '../actions/orderActions'
-import { orderListMyReducer } from '../reducers/orderReducers'
 
 function ProfileScreen({history}) {
     const [name, setName] = useState('')
@@ -16,19 +14,16 @@ function ProfileScreen({history}) {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState('')
-    // Khi thành công do location.search (chuỗi sau dấu ? là null) => redirect sang /
     const userDetails = useSelector(state => state.userDetails)
     const { user } = userDetails
     const dispatch = useDispatch()
-
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-
     const userUpdateProfile = useSelector(state => state.userUpdateProfile)
     const { success } = userUpdateProfile
-
     const orderListMy = useSelector(state => state.orderListMy)
     const { loading, error, orders } = orderListMy
+
     useEffect(() => {
         if(!userInfo){
             history.push('/login')
@@ -49,7 +44,6 @@ function ProfileScreen({history}) {
         if (password !== confirmPassword){
             setMessage('Password không trùng nhau')
         }else{
-            console.log('nam cao')
             dispatch(updateUserProfile({
                 'id': user._id,
                 'name': name,

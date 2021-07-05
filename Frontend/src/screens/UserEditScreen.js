@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import {Form, Button, Row, Col} from 'react-bootstrap'
+import {Form, Button} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../components/Loading'
 import Message from '../components/Message'
@@ -16,7 +16,7 @@ function UserEditScreen({ history, match }) {
     const [isAdmin, setIsAdmin] = useState(false)
     
     const userDetails = useSelector(state => state.userDetails)
-    const { error, loading, user } = userDetails
+    const { user } = userDetails
 
     const userUpdate = useSelector(state => state.userUpdate)
     const { error: errorUpdate, loading: loadingUpdate, success: successUpdate } = userUpdate
@@ -27,7 +27,6 @@ function UserEditScreen({ history, match }) {
             history.push('/admin/userlist')
         } else {
             if (!user || !user.name || user._id !== Number(userId)) {
-                console.log(userId)
                 dispatch(getUserDetails(userId))
             }else{
                 setName(user.name)

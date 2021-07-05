@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,7 +11,6 @@ function UserListScreen({ history }) {
     const dispatch = useDispatch()
     const userList = useSelector(state => state.userList)
     const { loading, error, users } = userList
-    console.log(error)
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
@@ -19,7 +18,6 @@ function UserListScreen({ history }) {
     const { success} = userDelete
 
     useEffect(() => {
-        console.log('nam 2')
         if (userInfo && userInfo.isAdmin) {
             dispatch(listUsers())
         } else {

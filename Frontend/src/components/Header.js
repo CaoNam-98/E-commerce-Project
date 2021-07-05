@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react' // rfce
+import React, { useEffect } from 'react'
 import { Navbar, Nav, Container, NavDropdown, Image } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import './../index.css'

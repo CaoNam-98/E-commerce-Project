@@ -9,20 +9,16 @@ import {
     ORDER_PAY_REQUEST,
     ORDER_PAY_SUCCESS,
     ORDER_PAY_FAIL,
-    ORDER_PAY_RESET,
     ORDER_DELIVER_REQUEST,
     ORDER_DELIVER_SUCCESS,
     ORDER_DELIVER_FAIL,
-    ORDER_DELIVER_RESET,
     ORDER_LIST_MY_REQUEST,
     ORDER_LIST_MY_SUCCESS,
     ORDER_LIST_MY_FAIL,
-    ORDER_LIST_MY_RESET,
     ORDER_LIST_REQUEST,
     ORDER_LIST_SUCCESS,
     ORDER_LIST_FAIL
 } from '../constants/orderConstants'
-
 
 export const createOrder = (order) => async (dispatch, getState) => {
     try {
@@ -51,12 +47,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
             type: ORDER_CREATE_SUCCESS,
             payload: data
         })
-
-        
-
         localStorage.removeItem('cartItems')
-
-
     } catch (error) {
         dispatch({
             type: ORDER_CREATE_FAIL,
@@ -88,13 +79,11 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
             `http://127.0.0.1:8000/orders/${id}/`,
             config
         )
-        console.log(data)
+        
         dispatch({
             type: ORDER_DETAILS_SUCCESS,
             payload: data
         })
-
-
     } catch (error) {
         dispatch({
             type: ORDER_DETAILS_FAIL,
@@ -132,8 +121,6 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
             type: ORDER_PAY_SUCCESS,
             payload: data
         })
-
-
     } catch (error) {
         dispatch({
             type: ORDER_PAY_FAIL,
@@ -166,13 +153,11 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
             {},
             config
         )
-
+        
         dispatch({
             type: ORDER_DELIVER_SUCCESS,
             payload: data
         })
-
-
     } catch (error) {
         dispatch({
             type: ORDER_DELIVER_FAIL,
